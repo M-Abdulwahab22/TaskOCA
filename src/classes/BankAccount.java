@@ -1,7 +1,7 @@
 package classes;
 
 public abstract class BankAccount {
-    protected int accountNumber;
+    protected String accountNumber;
     protected double balance;
 
     public abstract void applyMonthlyUpdate();

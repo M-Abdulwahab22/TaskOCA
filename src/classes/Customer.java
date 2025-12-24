@@ -1,5 +1,6 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
@@ -9,7 +10,10 @@ public class Customer {
 
     public Customer(String name)
     {
+        AccountNumberGenerator.customerId++;
+        this.customerId = AccountNumberGenerator.customerId;
         this.name = name;
+        this.accounts = new ArrayList<>();
     }
 
     public Customer(String name, int customerId)
@@ -18,8 +22,9 @@ public class Customer {
         this.customerId = customerId;
     }
 
-    public void addNewAccount()
+    public void addNewAccount(BankAccount newAccount)
     {
+        this.accounts.add(newAccount);
 
     }
 

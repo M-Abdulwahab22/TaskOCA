@@ -15,13 +15,23 @@ applyMonthlyUpdate() polymorphically
 
     public double monthlyFee;
 
+    public void setAccountBalance(double accountBalance)
+    {
+        this.balance = accountBalance;
+    }
+
+    public void setMonthlyFee(double monthlyFee)
+    {
+        this.monthlyFee = monthlyFee;
+    }
+
     public void applyMonthlyUpdate()
     {
 
     }
 
-    public void withdraw(double amount)
-    {
-
-    }
+//    public void withdraw(double amount)
+//    {
+//
+//    }
 }

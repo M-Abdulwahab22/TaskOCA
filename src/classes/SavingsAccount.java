@@ -5,6 +5,14 @@ public class SavingsAccount extends BankAccount{
     //no overdraft is allowed.
     public double interestRate;
 
+    public void setAccountBalance(double accountBalance)
+    {
+        this.balance = accountBalance;
+    }
+    public void setInterestRate(double interestRate)
+    {
+        this.interestRate = interestRate/ 100;
+    }
     public void applyMonthlyUpdate()
     {
         
