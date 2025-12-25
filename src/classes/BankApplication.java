@@ -262,44 +262,7 @@ public class BankApplication {
     //option 2 open bank account
     private void openBankAccount()
     {
-        Scanner scanner = new Scanner(System.in);
-        String accNum;
 
-        while(true)
-        {
-            System.out.println("please enter account number or -1 to exit screen: ");
-            if(scanner.hasNext()) {
-                accNum = scanner.nextLine();
-
-                if(accNum.equals("-1"))
-                {
-                    return;
-                }
-
-                if(!(accNum.trim().isEmpty()))
-                {
-                    boolean found = false;
-                    for(Customer c : allCustomers)
-                    {
-                            BankAccount acc = c.getAccountByAccountNumber(accNum);
-                            if(acc != null)
-                            {
-                                acc.displayAccountInfo();
-                                found = true;
-                                break;
-                            }
-                    }
-
-                    if (!found) {
-                        System.out.println("account not found. try again please");
-                    }
-
-                }
-
-
-            }
-
-        }
     }
 
 
@@ -438,7 +401,44 @@ public class BankApplication {
     //option 5 display account details
     private void displayAccountDetails()
     {
+        Scanner scanner = new Scanner(System.in);
+        String accNum;
 
+        while(true)
+        {
+            System.out.println("please enter account number or -1 to exit screen: ");
+            if(scanner.hasNext()) {
+                accNum = scanner.nextLine();
+
+                if(accNum.equals("-1"))
+                {
+                    return;
+                }
+
+                if(!(accNum.trim().isEmpty()))
+                {
+                    boolean found = false;
+                    for(Customer c : allCustomers)
+                    {
+                        BankAccount acc = c.getAccountByAccountNumber(accNum);
+                        if(acc != null)
+                        {
+                            acc.displayAccountInfo();
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        System.out.println("account not found. try again please");
+                    }
+
+                }
+
+
+            }
+
+        }
     }
 
     public void runApplication()
