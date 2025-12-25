@@ -63,8 +63,8 @@ public class BankApplication {
                     withdrawMoney();
                     break;
                 case 5:
-//                    displayAccountDetails();
-//                    break;
+                    displayAccountDetails();
+                    break;
                 case 6:
 //                    applyMonthlyProcessing();
 //                    break;
@@ -303,7 +303,7 @@ public class BankApplication {
     }
 
 
-    //option 3 deposit money (handle number format exception)
+    //option 3 deposit money
     private void depositMoney() {
         Scanner scanner = new Scanner(System.in);
         String accNum;
@@ -327,21 +327,30 @@ public class BankApplication {
                             while(true)
                             {
                                 System.out.println("please enter amount you want to deposit : ");
-                                if (scanner.hasNextDouble()) {
-                                    double amount = scanner.nextDouble();
-                                    if (amount > 0) {
-                                        if(acc.deposit(amount)){
-                                            System.out.println("amount deposited!");
-                                            acc.displayAccountInfo();
-                                            break;
-                                        }else{
-                                            System.out.println("failed to deposit");
-                                        }
 
-                                    } else {
-                                        System.out.println("amount have to be greater than 0");
+                                try{
+                                    if (scanner.hasNextLine()) {
+                                        String input = scanner.nextLine();
+                                        double amount = Double.parseDouble(input);
+                                        if (amount > 0) {
+                                            if(acc.deposit(amount)){
+                                                System.out.println("amount deposited!");
+                                                acc.displayAccountInfo();
+                                                break;
+                                            }else{
+                                                System.out.println("failed to deposit");
+                                            }
+
+                                        } else {
+                                            System.out.println("amount have to be greater than 0");
+                                        }
                                     }
+
+                                } catch (NumberFormatException e)
+                                {
+                                    System.out.println("enter correct format " + e.getMessage());
                                 }
+
                             }
 
                         }
@@ -359,7 +368,7 @@ public class BankApplication {
         }
     }
 
-    //option 4 withdraw money (handle number format exception)
+    //option 4 withdraw money
     private void withdrawMoney()
     {
         Scanner scanner = new Scanner(System.in);
@@ -384,20 +393,28 @@ public class BankApplication {
                             while(true)
                             {
                                 System.out.println("please enter amount you want to withdraw : ");
-                                if (scanner.hasNextDouble()) {
-                                    double amount = scanner.nextDouble();
-                                    if (amount > 0) {
-                                        if(acc.withdraw(amount)){
-                                            System.out.println("amount withdraw!");
-                                            acc.displayAccountInfo();
-                                            break;
-                                        }else{
-                                            System.out.println("failed to withdraw");
+                                try {
+                                    if (scanner.hasNextLine()) {
+                                        String input = scanner.nextLine();
+                                        double amount = Double.parseDouble(input);
+                                        if (amount > 0) {
+                                            if(acc.withdraw(amount)){
+                                                System.out.println("amount withdraw!");
+                                                acc.displayAccountInfo();
+                                                break;
+                                            }else{
+                                                System.out.println("failed to withdraw");
+                                            }
+
+                                        }else {
+                                            System.out.println("amount have to be greater than 0");
                                         }
 
-                                    }else {
-                                        System.out.println("amount have to be greater than 0");
                                     }
+
+                                }catch(NumberFormatException e)
+                                {
+                                    System.out.println("enter correct format " + e.getMessage());
 
                                 }
                             }
@@ -415,6 +432,13 @@ public class BankApplication {
 
             }
         }
+    }
+
+
+    //option 5 display account details
+    private void displayAccountDetails()
+    {
+
     }
 
     public void runApplication()
