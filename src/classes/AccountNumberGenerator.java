@@ -2,8 +2,9 @@ package classes;
 
 public class AccountNumberGenerator {
     public static int customerId = 0;
+    private static int accountNum = 1000;
     public static String generateUniqueId()
     {
-        return "customer_"+customerId;
+        return String.valueOf(++accountNum);
     }
 }

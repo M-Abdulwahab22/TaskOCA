@@ -192,6 +192,55 @@ public class BankApplication {
 
     }
 
+    private void createSavingsAccount(Customer customer)
+    {
+        Scanner scanner = new Scanner(System.in);
+        double balance;
+        double interestRate;
+
+        while(true)
+        {
+            System.out.println("please enter customer balance : ");
+            if(scanner.hasNextDouble()) {
+                balance = scanner.nextDouble();
+                scanner.nextLine();
+                if (balance > 0) {
+                    break;
+                } else {
+                    System.out.println("Balance have to be greater than 0.");
+                }
+            }else{
+                System.out.println("please enter a valid number!");
+                scanner.nextLine();
+            }
+        }
+
+        while(true)
+        {
+            System.out.println("please enter customer interest rate : ");
+            if(scanner.hasNextDouble()) {
+                interestRate = scanner.nextDouble();
+                scanner.nextLine();
+                if (interestRate >= 0) {
+                    break;
+                } else {
+                    System.out.println("interest have to be greater than 0.");
+                }
+            }else{
+                System.out.println("please enter a valid interest rate!");
+                scanner.nextLine();
+            }
+        }
+
+
+        SavingsAccount newSavingsAccount = new SavingsAccount();
+        customer.addNewAccount(newSavingsAccount);
+        newSavingsAccount.setAccountBalance(balance);
+        newSavingsAccount.setInterestRate(interestRate);
+        System.out.println(customer.getName() + " Savings Account Has been created successfully with starting balance = " +  balance);
+
+    }
+
     private void createCheckingAccount()
     {
         Scanner scanner = new Scanner(System.in);
@@ -258,11 +307,114 @@ public class BankApplication {
 
     }
 
+    private void createCheckingAccount(Customer customer)
+    {
+        Scanner scanner = new Scanner(System.in);
+        double balance;
+        double monthlyFee;
+
+        while(true)
+        {
+            System.out.println("please enter customer balance : ");
+            if(scanner.hasNextDouble()) {
+                balance = scanner.nextDouble();
+                scanner.nextLine();
+                if (balance > 0) {
+                    break;
+                } else {
+                    System.out.println("Balance have to be greater than 0.");
+                }
+            }else{
+                System.out.println("please enter a valid number!");
+                scanner.nextLine();
+            }
+        }
+
+        while(true)
+        {
+            System.out.println("please enter customer monthly fee : ");
+            if(scanner.hasNextDouble()) {
+                monthlyFee = scanner.nextDouble();
+                scanner.nextLine();
+                if (monthlyFee >= 0) {
+                    break;
+                } else {
+                    System.out.println("monthly fee have to be greater than 0.");
+                }
+            }else{
+                System.out.println("please enter a valid monthly fee!");
+                scanner.nextLine();
+            }
+        }
+
+
+        CheckingAccount newCheckingAccount = new CheckingAccount();
+        customer.addNewAccount(newCheckingAccount);
+        newCheckingAccount.setAccountBalance(balance);
+        newCheckingAccount.setMonthlyFee(monthlyFee);
+        System.out.println(customer.getName() + " Checking Account Has been created successfully with starting balance = " +  balance);
+
+    }
+
 
     //option 2 open bank account
     private void openBankAccount()
     {
+        Scanner scanner = new Scanner(System.in);
 
+        String name;
+
+        while(true) {
+            System.out.println(
+                    "please enter the customer name you want to add the account to (-1 to exit the screen): ");
+            if (scanner.hasNext()) {
+                name = scanner.nextLine();
+                if (name.equals("-1")) {
+                    return;
+                }
+
+                Customer customer = null;
+                for (Customer c : allCustomers) {
+                    if (c.getName().equalsIgnoreCase(name.trim())) {
+                        customer = c;
+                        break;
+                    }
+                }
+
+                if (customer == null) {
+                    System.out.println("customer not found. create the customer to proceed");
+                    return;
+                }
+
+                System.out.println("customer found : " + customer.getName());
+                System.out.println("which type of account you want to open : ");
+                System.out.println("(1) Savings Account");
+                System.out.println("(2) Checking Account");
+
+
+
+                    if(scanner.hasNextInt())
+                    {
+                        int choice = scanner.nextInt();
+                        scanner.nextLine();
+
+                        switch (choice) {
+                        case 1:
+                            createSavingsAccount(customer);
+                            break;
+                        case 2:
+                            createCheckingAccount(customer);
+                            break;
+                        case 3:
+                            return;
+                        default:
+                            System.out.println("invald choice.");
+                        }
+
+                    }
+
+            }
+        }
     }
 
 
