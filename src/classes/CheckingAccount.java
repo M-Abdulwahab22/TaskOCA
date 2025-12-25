@@ -30,10 +30,21 @@ applyMonthlyUpdate() polymorphically
 
     }
 
-//    public void withdraw(double amount)
-//    {
-//
-//    }
+    public boolean withdraw(double amount)
+    {
+        double temp = this.balance - amount;
+        if(temp < -500)
+        {
+            System.out.println("overfraft limit reached");
+            return false;
+        }
+
+        this.balance -= amount;
+        return true;
+
+
+
+    }
 
     public void displayAccountInfo()
     {

@@ -57,19 +57,19 @@ public class BankApplication {
                     openBankAccount();
                     break;
                 case 3:
-//                    depositMoney(scanner);
-//                    break;
+                    depositMoney();
+                    break;
                 case 4:
-//                    withdrawMoney(scanner);
-//                    break;
+                    withdrawMoney();
+                    break;
                 case 5:
-//                    displayAccountDetails(scanner);
+//                    displayAccountDetails();
 //                    break;
                 case 6:
-//                    applyMonthlyProcessing(scanner);
+//                    applyMonthlyProcessing();
 //                    break;
                 case 7:
-//                    displayAllCustomers(scanner);
+//                    displayAllCustomers();
 //                    break;
                 case 8:
                     System.out.println("Exiting...");
@@ -284,9 +284,6 @@ public class BankApplication {
                             BankAccount acc = c.getAccountByAccountNumber(accNum);
                             if(acc != null)
                             {
-                                System.out.println("Account number " + accNum);
-                                System.out.println("account customer : " + c.getName() );
-                                System.out.println("customer id : " + c.getCustomerId());
                                 acc.displayAccountInfo();
                                 found = true;
                                 break;
@@ -306,10 +303,125 @@ public class BankApplication {
     }
 
 
+    //option 3 deposit money (handle number format exception)
+    private void depositMoney() {
+        Scanner scanner = new Scanner(System.in);
+        String accNum;
+
+        while (true) {
+            System.out.println("enter account number you want to deposit to or -1 to exit screen : ");
+            if (scanner.hasNext()) {
+                accNum = scanner.nextLine();
+
+                if (accNum.equals("-1")) {
+                    return;
+                }
+
+                if (!(accNum.trim().isEmpty())) {
+                    boolean found = false;
+                    for (Customer c : allCustomers) {
+                        BankAccount acc = c.getAccountByAccountNumber(accNum);
+                        if (acc != null) {
+                            acc.displayAccountInfo();
+                            found = true;
+                            while(true)
+                            {
+                                System.out.println("please enter amount you want to deposit : ");
+                                if (scanner.hasNextDouble()) {
+                                    double amount = scanner.nextDouble();
+                                    if (amount > 0) {
+                                        if(acc.deposit(amount)){
+                                            System.out.println("amount deposited!");
+                                            acc.displayAccountInfo();
+                                            break;
+                                        }else{
+                                            System.out.println("failed to deposit");
+                                        }
+
+                                    } else {
+                                        System.out.println("amount have to be greater than 0");
+                                    }
+                                }
+                            }
+
+                        }
+
+
+                    }
+                    if (!found) {
+                        System.out.println("account not found. try again please");
+                    }
+
+
+                }
+
+            }
+        }
+    }
+
+    //option 4 withdraw money (handle number format exception)
+    private void withdrawMoney()
+    {
+        Scanner scanner = new Scanner(System.in);
+        String accNum;
+
+        while (true) {
+            System.out.println("enter account number you want to withdraw to or -1 to exit screen : ");
+            if (scanner.hasNext()) {
+                accNum = scanner.nextLine();
+
+                if (accNum.equals("-1")) {
+                    return;
+                }
+
+                if (!(accNum.trim().isEmpty())) {
+                    boolean found = false;
+                    for (Customer c : allCustomers) {
+                        BankAccount acc = c.getAccountByAccountNumber(accNum);
+                        if (acc != null) {
+                            acc.displayAccountInfo();
+                            found = true;
+                            while(true)
+                            {
+                                System.out.println("please enter amount you want to withdraw : ");
+                                if (scanner.hasNextDouble()) {
+                                    double amount = scanner.nextDouble();
+                                    if (amount > 0) {
+                                        if(acc.withdraw(amount)){
+                                            System.out.println("amount withdraw!");
+                                            acc.displayAccountInfo();
+                                            break;
+                                        }else{
+                                            System.out.println("failed to withdraw");
+                                        }
+
+                                    }else {
+                                        System.out.println("amount have to be greater than 0");
+                                    }
+
+                                }
+                            }
+
+                        }
+
+
+                    }
+                    if (!found) {
+                        System.out.println("account not found. try again please");
+                    }
+
+
+                }
+
+            }
+        }
+    }
 
     public void runApplication()
     {
         this.mainMenu();
     }
+
+
 
 }
