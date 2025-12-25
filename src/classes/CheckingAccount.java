@@ -34,4 +34,10 @@ applyMonthlyUpdate() polymorphically
 //    {
 //
 //    }
+
+    public void displayAccountInfo()
+    {
+        super.displayAccountInfo();
+        System.out.println("monthly fee on account : " + this.monthlyFee);
+    }
 }

@@ -13,6 +13,13 @@ public class SavingsAccount extends BankAccount{
     {
         this.interestRate = interestRate/ 100;
     }
+
+    public void displayAccountInfo()
+    {
+        super.displayAccountInfo();
+        System.out.println("interest rate on account : " + this.interestRate);
+    }
+
     public void applyMonthlyUpdate()
     {
         

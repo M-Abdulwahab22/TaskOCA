@@ -1,7 +1,11 @@
 package classes;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BankApplication {
+
+    private List<Customer> allCustomers = new ArrayList<>();
 
     private void displayMainMenu()
     {
@@ -50,8 +54,8 @@ public class BankApplication {
                     createNewCustomer();
                     break;
                 case 2:
-//                    openBankAccount(scanner);
-//                    break;
+                    openBankAccount();
+                    break;
                 case 3:
 //                    depositMoney(scanner);
 //                    break;
@@ -84,6 +88,7 @@ public class BankApplication {
 
     }
 
+    //optio 1 create new customer.
     private void createNewCustomer()
     {
         Scanner scanner = new Scanner(System.in);
@@ -130,7 +135,7 @@ public class BankApplication {
         while(true)
         {
             System.out.println("please enter customer name : ");
-            if(scanner.hasNext()) {
+
                 name = scanner.nextLine();
                 if(!(name.trim().isEmpty()))
                 {
@@ -138,8 +143,9 @@ public class BankApplication {
 
                 }else{
                     System.out.println("Please Enter a name!");
+
                 }
-            }
+
         }
         while(true)
         {
@@ -177,6 +183,7 @@ public class BankApplication {
 
 
         Customer newCustomer = new Customer(name);
+        allCustomers.add(newCustomer);
         SavingsAccount newSavingsAccount = new SavingsAccount();
         newCustomer.addNewAccount(newSavingsAccount);
         newSavingsAccount.setAccountBalance(balance);
@@ -195,7 +202,7 @@ public class BankApplication {
         while(true)
         {
             System.out.println("please enter customer name : ");
-            if(scanner.hasNext()) {
+
                 name = scanner.nextLine();
                 if(!(name.trim().isEmpty()))
                 {
@@ -204,7 +211,7 @@ public class BankApplication {
                 }else{
                     System.out.println("Please Enter a name!");
                 }
-            }
+
         }
         while(true)
         {
@@ -242,6 +249,7 @@ public class BankApplication {
 
 
         Customer newCustomer = new Customer(name);
+        allCustomers.add(newCustomer);
         CheckingAccount newCheckingAccount = new CheckingAccount();
         newCustomer.addNewAccount(newCheckingAccount);
         newCheckingAccount.setAccountBalance(balance);
@@ -249,6 +257,55 @@ public class BankApplication {
         System.out.println(name + " Checking Account Has been created successfully with starting balance = " +  balance);
 
     }
+
+
+    //option 2 open bank account
+    private void openBankAccount()
+    {
+        Scanner scanner = new Scanner(System.in);
+        String accNum;
+
+        while(true)
+        {
+            System.out.println("please enter account number or -1 to exit screen: ");
+            if(scanner.hasNext()) {
+                accNum = scanner.nextLine();
+
+                if(accNum.equals("-1"))
+                {
+                    return;
+                }
+
+                if(!(accNum.trim().isEmpty()))
+                {
+                    boolean found = false;
+                    for(Customer c : allCustomers)
+                    {
+                            BankAccount acc = c.getAccountByAccountNumber(accNum);
+                            if(acc != null)
+                            {
+                                System.out.println("Account number " + accNum);
+                                System.out.println("account customer : " + c.getName() );
+                                System.out.println("customer id : " + c.getCustomerId());
+                                acc.displayAccountInfo();
+                                found = true;
+                                break;
+                            }
+                    }
+
+                    if (!found) {
+                        System.out.println("account not found. try again please");
+                    }
+
+                }
+
+
+            }
+
+        }
+    }
+
+
 
     public void runApplication()
     {

@@ -10,10 +10,9 @@ public class Customer {
 
     public Customer(String name)
     {
-        AccountNumberGenerator.customerId++;
-        this.customerId = AccountNumberGenerator.customerId;
         this.name = name;
         this.accounts = new ArrayList<>();
+        this.customerId = ++AccountNumberGenerator.customerId;
     }
 
     public Customer(String name, int customerId)
@@ -22,17 +21,33 @@ public class Customer {
         this.customerId = customerId;
     }
 
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public int getCustomerId()
+    {
+        return this.customerId;
+    }
+
     public void addNewAccount(BankAccount newAccount)
     {
         this.accounts.add(newAccount);
 
     }
 
-//    public BankAccount getAccountByAccountNumber(int accountNumber)
-//    {
-//        BankAccount a = new BankAccount();
-//        return a;
-//    }
+    public BankAccount getAccountByAccountNumber(String accountNumber)
+    {
+       for(BankAccount acc : accounts)
+       {
+           if(acc.accountNumber.equalsIgnoreCase(accountNumber))
+           {
+               return acc;
+           }
+       }
+       return null;
+    }
 
     public void displayCustomerDetails(int customerId)
     {
