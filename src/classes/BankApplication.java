@@ -69,8 +69,8 @@ public class BankApplication {
                     applyMonthlyProcessing();
                     break;
                 case 7:
-//                    displayAllCustomers();
-//                    break;
+                    displayAllCustomers();
+                    break;
                 case 8:
                     System.out.println("Exiting...");
                     System.exit(0);
@@ -601,6 +601,7 @@ public class BankApplication {
             System.out.println("there is no customers in the system");
             return;
         }
+        System.out.println("Applying monthly updates to all accounts...");
         for(Customer c : allCustomers)
         {
             List<BankAccount> accounts = c.getCustomerAccounts();
@@ -609,6 +610,27 @@ public class BankApplication {
                 acc.applyMonthlyUpdate();
             }
         }
+        System.out.println("monthly updates applied succefully ");
+        displayAllCustomers();
+    }
+
+    //option 7 display all customers
+    private void displayAllCustomers()
+    {
+        if(allCustomers.isEmpty())
+        {
+            System.out.println("there is no customers in the system");
+            return;
+        }
+
+        for(Customer c : allCustomers)
+        {
+
+            c.displayCustomerDetails(c.getCustomerId());
+
+        }
+
+        System.out.println();
     }
 
     public void runApplication()

@@ -56,7 +56,18 @@ public class Customer {
 
     public void displayCustomerDetails(int customerId)
     {
+        System.out.println("customer id : " + customerId);
+        System.out.println("name : " + this.name);
 
+        System.out.println(this.name + " Accounts : ");
+        System.out.println("===============================");
+
+        for(BankAccount acc : accounts)
+        {
+            acc.displayAccountInfo();
+            System.out.println("___________________________");
+        }
+        System.out.println("===============================");
     }
 
 
