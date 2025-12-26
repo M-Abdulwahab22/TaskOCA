@@ -27,7 +27,7 @@ applyMonthlyUpdate() polymorphically
 
     public void applyMonthlyUpdate()
     {
-
+        withdraw(this.monthlyFee);
     }
 
     public boolean withdraw(double amount)

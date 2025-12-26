@@ -22,7 +22,7 @@ public class SavingsAccount extends BankAccount{
 
     public void applyMonthlyUpdate()
     {
-        
+        this.balance = this.balance + (this.balance * this.interestRate);
     }
 
 

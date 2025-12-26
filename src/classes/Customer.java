@@ -31,6 +31,11 @@ public class Customer {
         return this.customerId;
     }
 
+    public List<BankAccount> getCustomerAccounts()
+    {
+        return this.accounts;
+    }
+
     public void addNewAccount(BankAccount newAccount)
     {
         this.accounts.add(newAccount);

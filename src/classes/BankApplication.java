@@ -66,8 +66,8 @@ public class BankApplication {
                     displayAccountDetails();
                     break;
                 case 6:
-//                    applyMonthlyProcessing();
-//                    break;
+                    applyMonthlyProcessing();
+                    break;
                 case 7:
 //                    displayAllCustomers();
 //                    break;
@@ -590,6 +590,24 @@ public class BankApplication {
 
             }
 
+        }
+    }
+
+    //option 6 apply monthly updates
+    private void applyMonthlyProcessing()
+    {
+        if(allCustomers.isEmpty())
+        {
+            System.out.println("there is no customers in the system");
+            return;
+        }
+        for(Customer c : allCustomers)
+        {
+            List<BankAccount> accounts = c.getCustomerAccounts();
+            for(BankAccount acc : accounts)
+            {
+                acc.applyMonthlyUpdate();
+            }
         }
     }
 
