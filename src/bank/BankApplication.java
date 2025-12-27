@@ -1,4 +1,6 @@
-package classes;
+package bank;
+import customer.Customer;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

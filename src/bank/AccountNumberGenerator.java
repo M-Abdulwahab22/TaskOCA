@@ -1,4 +1,4 @@
-package classes;
+package bank;
 
 public class AccountNumberGenerator {
     public static int customerId = 0;

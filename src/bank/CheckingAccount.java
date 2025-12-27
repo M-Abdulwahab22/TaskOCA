@@ -1,4 +1,4 @@
-package classes;
+package bank;
 
 public class CheckingAccount extends BankAccount{
 
@@ -14,11 +14,13 @@ public class CheckingAccount extends BankAccount{
         this.monthlyFee = monthlyFee;
     }
 
+    @Override
     public void applyMonthlyUpdate()
     {
         withdraw(this.monthlyFee);
     }
 
+    @Override
     public boolean withdraw(double amount)
     {
         double temp = this.balance - amount;
@@ -35,6 +37,7 @@ public class CheckingAccount extends BankAccount{
 
     }
 
+    @Override
     public void displayAccountInfo()
     {
         super.displayAccountInfo();

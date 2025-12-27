@@ -1,4 +1,4 @@
-package classes;
+package bank;
 
 public abstract class BankAccount {
     protected String accountNumber;
@@ -10,6 +10,10 @@ public abstract class BankAccount {
     }
     public abstract void applyMonthlyUpdate();
 
+    public String getAccountNumber()
+    {
+        return this.accountNumber;
+    }
     public boolean deposit(double amount)
     {
         if(amount < 0)

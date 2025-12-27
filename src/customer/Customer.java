@@ -1,4 +1,7 @@
-package classes;
+package customer;
+
+import bank.AccountNumberGenerator;
+import bank.BankAccount;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +49,7 @@ public class Customer {
     {
        for(BankAccount acc : accounts)
        {
-           if(acc.accountNumber.equalsIgnoreCase(accountNumber))
+           if(acc.getAccountNumber().equalsIgnoreCase(accountNumber))
            {
                return acc;
            }
